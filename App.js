@@ -1,38 +1,64 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {
+  Platform, StyleSheet, Text, View, SafeAreaView, Button
+} from 'react-native';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+export default class App extends Component {
 
-type Props = {};
-export default class App extends Component<Props> {
+  state = {
+    page: 0,
+  };
+
+  toggleLayout = () => {
+    const nextLayout = this.state.page + 1;
+    this.setState({ page: nextLayout });
+  }
+
   render() {
+    const currentPage = this.state.page;
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
+      <SafeAreaView style={styles.safeAreaView}>
+        <View style={styles.topGrid3}>
+          <Text style={styles.welcome}>Icon</Text>    
+          <Text style={styles.welcome}>Title</Text>    
+          <Text style={styles.welcome}>Description</Text>     
+        </View>
+        <View style={styles.middleGrid5AndSome}>
+        </View>
+        <View style={styles.footerGrid1AndSome}>
+          <Button onPress={this.toggleLayout} title="Toggle Layout"/>       
+        </View>
+      </SafeAreaView>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  safeAreaView: {
+    flex: 1,
+    backgroundColor: '#fafbfe',
+  },
+  topGrid3: {
+    flex: 3,
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    paddingLeft: '5%',
+  },
+  middleGrid5AndSome: {
+    flex: 5.5,
+    backgroundColor: 'blue',
+    justifyContent: 'center',
+  },
+  footerGrid1AndSome: {
+    flex: 0.75,
+    backgroundColor: 'green',
+    justifyContent: 'center',
+  },
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
@@ -40,10 +66,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
 });
