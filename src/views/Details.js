@@ -3,29 +3,6 @@ import {
   Platform, StyleSheet, Text, View, SafeAreaView, Button
 } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
-import { createStackNavigator } from 'react-navigation';
-
-
-class HomeScreen extends Component {
-  render() {
-    return (
-      <SafeAreaView style={styles.safeAreaView}>
-        <View style={styles.topGrid3}>
-          <Text style={styles.welcome}>Home Page</Text>             
-        </View>
-        <View style={styles.middleGrid5AndSome}>
-          <Button
-            title="Go to Details"
-            onPress={() => this.props.navigation.navigate('Details')}
-          />
-        </View>
-        <View style={styles.footerGrid1AndSome}>
-          <Text style={styles.welcome}>Footer</Text>   
-        </View>
-      </SafeAreaView>
-    );
-  }
-}
 
 class DetailsScreen extends React.Component {
   render() {
@@ -34,20 +11,6 @@ class DetailsScreen extends React.Component {
         <Text>Details Screen</Text>
       </View>
     );
-  }
-}
-const RootStack = createStackNavigator({
-  Home: HomeScreen,
-  Details: DetailsScreen,
-},
-{
-  initialRouteName: 'Home',
-}
-);
-
-export default class App extends React.Component { 
-  render() {
-    return <RootStack />
   }
 }
 
@@ -85,3 +48,5 @@ const styles = StyleSheet.create({
     margin: 10,
   },
 });
+  
+export default DetailsScreen;
