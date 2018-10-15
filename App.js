@@ -3,34 +3,51 @@ import {
   Platform, StyleSheet, Text, View, SafeAreaView, Button
 } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
+import { createStackNavigator } from 'react-navigation';
 
-export default class App extends Component {
 
-  state = {
-    page: 0,
-  };
-
-  toggleLayout = () => {
-    const nextLayout = this.state.page + 1;
-    this.setState({ page: nextLayout });
-  }
-
+class HomeScreen extends Component {
   render() {
-    const currentPage = this.state.page;
     return (
       <SafeAreaView style={styles.safeAreaView}>
         <View style={styles.topGrid3}>
-          <Text style={styles.welcome}>Icon</Text>    
-          <Text style={styles.welcome}>Title</Text>    
-          <Text style={styles.welcome}>Description</Text>     
+          <Text style={styles.welcome}>Home Page</Text>             
         </View>
         <View style={styles.middleGrid5AndSome}>
+          <Button
+            title="Go to Details"
+            onPress={() => this.props.navigation.navigate('Details')}
+          />
         </View>
         <View style={styles.footerGrid1AndSome}>
-          <Button onPress={this.toggleLayout} title="Toggle Layout"/>       
+          <Text style={styles.welcome}>Footer</Text>   
         </View>
       </SafeAreaView>
     );
+  }
+}
+
+class DetailsScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Details Screen</Text>
+      </View>
+    );
+  }
+}
+const RootStack = createStackNavigator({
+  Home: HomeScreen,
+  Details: DetailsScreen,
+},
+{
+  initialRouteName: 'Home',
+}
+);
+
+export default class App extends React.Component { 
+  render() {
+    return <RootStack />
   }
 }
 
